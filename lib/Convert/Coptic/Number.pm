@@ -8,7 +8,7 @@ BEGIN
 	use strict;
 	use vars qw($VERSION @CNumbers %CNumbers $cNumberRE);
 
-	$VERSION = '0.10';
+	$VERSION = '0.11';
 
 	require 5.000;
 
@@ -47,7 +47,6 @@ BEGIN
 		'ϣ'	=> 900,
 	);
 
-	$cNumberRE = qr/[α-ρς-ωϛϲ]/;
 }
 
 
@@ -87,7 +86,7 @@ sub _fromCoptic
 	s/̄//og;
 	s/̱/000/g;
 	s/͇/000000/g;
-	s/($cNumberRE)/$CNumbers{$1}/g;
+	s/([α-ρς-ωϛϲ])/$CNumbers{$1}/g;
 
 	my $out = 0;
 	s/(\d0+)/$out += $1/eg;
